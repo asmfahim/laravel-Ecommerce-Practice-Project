@@ -58,11 +58,11 @@
                                         </li>
                                         {{-- <li class="nav-item">
                                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                        </li>
-                                    </ul> --}}
+                                        </li> --}}
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-md-2" role="tablist">
+                            <div class="col-md-2" >
                                 <a href="{{route('admin.profile.edit')}}" class="btn btn-primary profile-edit-btn p-1"> Edit Profile </a>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                                     </div>
                                                 </div>
                                     </div>
-                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    {{-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label>Experience</label>
@@ -172,7 +172,7 @@
                                                 <p>Your detail description</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -188,9 +188,9 @@
 
 @section('scripts')
 
-<script>
+{{-- <script>
     function editFunc(){
         document.getElementById('profile-tab').classList.toggle('active');
     }
-</script>
+</script> --}}
 @endsection

@@ -5,6 +5,7 @@
 <style>
     .form-check-label {
         text-transform: capitalize;
+
     }
 </style>
 @endsection

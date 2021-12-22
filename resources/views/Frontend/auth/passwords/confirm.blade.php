@@ -1,6 +1,71 @@
 @extends('Frontend.layouts.app')
+@section('title','CONFIRM PASSWORD')
+
+@section('style')
+
+@endsection
 
 @section('content')
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li><a href="{{url('/')}}">Home</a></li>
+                <li class='active'>Confirm Password</li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content">
+    <div class="container">
+        <div class="sign-in-page">
+            <h3 class="text-center gray">Confirm Password</h3>
+            {{ __('Please confirm your password before continuing.') }}
+              <div class="tab-content">
+                <form method="POST" action="{{ route('password.confirm') }}">
+                    @csrf
+
+                    <div class="form-group row">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Confirm Password') }}
+                            </button>
+
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+              </div><!-- /.row -->
+        </div><!-- /.sigin-in-->
+        <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+        @include('Frontend.partials.brands')
+        <!-- /.logo-slider -->
+        <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+    </div><!-- /.container -->
+</div><!-- /.body-content -->
+
+@endsection
+
+@section('script')
+@endsection
+
+
+
+
+{{-- @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -46,4 +111,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

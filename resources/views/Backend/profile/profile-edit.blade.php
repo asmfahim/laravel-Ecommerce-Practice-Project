@@ -123,7 +123,7 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <img src="{{(!empty($admin->profile_photo_path)) ? url('public/upload/admin_images/'.$admin->profile_photo_path) : url('public/upload/no_photo.png')}}" alt="" id="showImage" width="100" height="100">
+                                                    <img src="{{(!empty($admin->profile_photo_path)) ? url('public/upload/admin_images/'.$admin->profile_photo_path) : url('public/upload/no_photo.png')}}" alt="" id="showImage" width="100" height="100" style="border-radius: 5px;">
                                                 </div>
                                             </div>
 
@@ -163,8 +163,8 @@
                                                 </div>
                                             </div>
 
-                                            {{-- errors list --}}
-                                            {{-- <div class="form-row">
+                                            {{-- errors list
+                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     @if ($errors->any())
                                                     <div class="alert alert-danger">
@@ -179,7 +179,6 @@
                                             </div> --}}
                                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Change Password</button>
                                         </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -187,6 +186,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <!-- basic form end -->
         </div>
     </div>

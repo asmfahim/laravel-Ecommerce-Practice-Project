@@ -1,6 +1,6 @@
 @extends('Backend.auth.login-app')
 
-@section('title','Admin-Panel Login Page')
+@section('title','ADMIN PANEL LOGIN PAGE')
 
 @section('login-content')
 

@@ -6,7 +6,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="{{ $usr->can('dashboard.view') || $usr->can('dashboard.edit') ? route('admin.dashboard') : ''}}"><img src="{{asset('public/Backend')}}/assets/images/icon/logo.png" alt="logo"></a>
+            <a href="{{ $usr->can('dashboard.view') || $usr->can('dashboard.edit') ? route('admin.dashboard') : ''}}"><img src="{{asset('public/Backend')}}/assets/images/logo/logo3.png" alt="logo"></a>
         </div>
     </div>
     <div class="main-menu">
@@ -51,6 +51,29 @@
                     </li>
                     @endif
 
+                    @if ($usr->can('brand.create') || $usr->can('brand.view') ||  $usr->can('brand.edit') ||  $usr->can('brand.delete'))
+
+                    <li class="{{Route::is('admin.brand.index') | Route::is('admin.brand.edit') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Brands
+                            </span></a>
+                        <ul class="collapse">
+                            <li class="{{Route::is('admin.brand.index') | Route::is('admin.brand.edit') ? 'active' : ''}}"><a href="{{route('admin.brand.index')}}">All Brand</a></li>
+                        </ul>
+                    </li>
+                    @endif
+
+                    @if ($usr->can('category.create') || $usr->can('category.view') ||  $usr->can('category.edit') ||  $usr->can('category.delete'))
+
+                    <li class="{{Route::is('admin.category.index') | Route::is('admin.category.edit') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Categorys
+                            </span></a>
+                        <ul class="collapse">
+                            <li class="{{Route::is('admin.category.index') | Route::is('admin.category.edit') ? 'active' : ''}}"><a href="{{route('admin.category.index')}}">All Brand</a></li>
+                        </ul>
+                    </li>
+                    @endif
 
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i

@@ -8,13 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> Multi-Guard | @yield('title',' App')</title>
+    <title> FLY-MARKET | @yield('title',' App')</title>
 
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png"
-        href="{{asset('public/Backend')}}/assets/images/icon/market-value/icon3.png">
+    <link rel="shortcut icon" type="image/png"href="{{asset('public/Backend')}}/assets/images/logo/logo3.png">
     <link rel="stylesheet" href="{{asset('public/Backend')}}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('public/Backend')}}/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('public/Backend')}}/assets/css/themify-icons.css">
@@ -32,6 +31,7 @@
     <link rel="stylesheet" href="{{asset('public/Backend')}}/assets/css/default-css.css">
     <link rel="stylesheet" href="{{asset('public/Backend')}}/assets/css/styles.css">
     <link rel="stylesheet" href="{{asset('public/Backend')}}/assets/css/responsive.css">
+
 
 
     {{-- <!-- Scripts -->

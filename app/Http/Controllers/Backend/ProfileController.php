@@ -61,7 +61,8 @@ class ProfileController extends Controller
             'email' => 'required|max:255|email|unique:admins,email,' . $id,
             'password' => 'nullable|min:8|confirmed',
             'phone' => 'required | min:11 | numeric | unique:admins,phone_number,' . $id,
-            'address' => 'required'
+            'address' => 'required',
+            'profile_photo_path' => 'mimes:jpeg,jpg,png,gif|max:10000'
         ],[
             'name.requried' => 'Please give a admin user name',
             'email.requried' => 'Please give an email address',
