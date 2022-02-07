@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label class="col-form-label">Select</label>
+                                    <label for="select-role" class="col-form-label">Select</label>
                                     <select id="select-role" name="role" class="form-control">
                                         <option value="">Select</option>
                                         @foreach ($roles as $row)

@@ -32,9 +32,9 @@ class CategoryController extends Controller
         if (is_null($this->user) || !$this->user->can('category.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view any Category !'); }
 
-        $category = Category::all();
+        $categories = Category::all();
 
-        return view('Backend.category.category-view',compact('category'));
+        return view('Backend.category.category-view',compact('categories'));
     }
 
     /**
@@ -135,7 +135,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if(is_null($this->user) || !$this->user->can('category.delete')){
-            abort(403, " Sorry !! You are Unauthorized to Delete any Brand");}
+            abort(403, " Sorry !! You are Unauthorized to Delete any Category");}
 
         $category = Category::find($id);
 

@@ -43,6 +43,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet"> --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+
 </head>
 
 <body>
@@ -258,7 +260,6 @@
 
     <!-- modernizr css -->
     <script src="{{asset('public/Backend')}}/assets/js/vendor/modernizr-2.8.3.min.js"></script>
-
     <script src="{{asset('public/Backend')}}/assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
     <script src="{{asset('public/Backend')}}/assets/js/popper.min.js"></script>

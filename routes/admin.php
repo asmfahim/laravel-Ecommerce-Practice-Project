@@ -3,14 +3,18 @@
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Backend\Auth\LoginController;
     use App\Http\Controllers\Backend\AdminController;
-    use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
+use App\Http\Controllers\Backend\AjaxController;
+use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
     use App\Http\Controllers\Backend\Auth\ResetPasswordController;
     use App\Http\Controllers\Backend\Auth\ConfirmPasswordController;
     use App\Http\Controllers\Backend\BrandController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\PermissionController;
-    use App\Http\Controllers\Backend\ProfileController;
+    use App\Http\Controllers\Backend\CategoryController;
+    use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ProfileController;
     use App\Http\Controllers\Backend\RolesController;
+    use App\Http\Controllers\Backend\SubCategoryController;
+    use App\Http\Controllers\Backend\SubSubCategoryController;
     use App\Http\Controllers\Backend\UserController;
 
 Route::get('/', function () {
@@ -38,14 +42,15 @@ Route::get('/', function () {
         Route::post('logout',[LoginController::class,'logout'])->name('admin.logout');
 
         // Roles Route Resource
-        Route::resource('roles', RolesController::class,['names'=>'admin.roles']);
+        Route::resource('roles', RolesController::class,['names'=>'admin.roles'])->except([ 'show']);
 
         // Permission Routes
         Route::get('permissions',[PermissionController::class,'index'])->name('admin.permission.create');
         Route::post('permissions/store',[PermissionController::class,'store'])->name('admin.permission.store');
 
+
         // Admin User Routes
-        Route::resource('user', UserController::class,['names'=> 'admin.user']);
+        Route::resource('user', UserController::class,['names'=> 'admin.user'])->except([ 'show']);
 
         //Admin User Routes
         Route::get('profile', [ProfileController::class,'index'])->name('admin.profile.index');
@@ -62,8 +67,24 @@ Route::get('/', function () {
             Route::delete('/destroy/{id}',[BrandController::class,'Brand_Destroy'])->name('admin.brand.destroy');
         });
 
+        Route::prefix('category')->group(function(){
         //Category Routes
-        Route::resource('categories', CategoryController::class,['names' => 'admin.category']);
+        Route::resource('/category', CategoryController::class,['names' => 'admin.category'])->except(['create', 'show']);
+
+        //Sub Category Routes
+        Route::resource('/sub', SubCategoryController::class,['names' => 'admin.subcategory'])->except(['create','show']);
+        Route::get('/sub/ajax/{id}',[AjaxController::class,'Sub_Ajax'])->name('admin.subcategory.ajax');
+
+        //Sub Sub Category Routes
+        Route::resource('/sub/sub', SubSubCategoryController::class,['names' => 'admin.subsubcategory'])->except(['create','show']);
+        Route::get('/sub/sub/ajax/{id}',[AjaxController::class,'SubSub_Ajax'])->name('admin.subsubcategory.ajax');
+
+        });
+
+        //Product Routes
+        Route::resource('/product', ProductController::class,['names' => 'admin.product'])->except(['show']);
+
+
 
 
 

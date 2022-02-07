@@ -55,7 +55,7 @@
 
                     <li class="{{Route::is('admin.brand.index') | Route::is('admin.brand.edit') ? 'active' : '' }}">
                         <a href="javascript:void(0)" aria-expanded="true"><i
-                                class="ti-layout-sidebar-left"></i><span>Brands
+                                class="fa fa-list-ul"></i><span>Brands
                             </span></a>
                         <ul class="collapse">
                             <li class="{{Route::is('admin.brand.index') | Route::is('admin.brand.edit') ? 'active' : ''}}"><a href="{{route('admin.brand.index')}}">All Brand</a></li>
@@ -65,15 +65,43 @@
 
                     @if ($usr->can('category.create') || $usr->can('category.view') ||  $usr->can('category.edit') ||  $usr->can('category.delete'))
 
-                    <li class="{{Route::is('admin.category.index') | Route::is('admin.category.edit') ? 'active' : '' }}">
+                    <li class="{{Route::is('admin.category.index') | Route::is('admin.category.edit') | Route::is('admin.subcategory.index') | Route::is('admin.subcategory.edit') | Route::is('admin.subsubcategory.index') | Route::is('admin.subsubcategory.edit') ? 'active' : '' }}">
                         <a href="javascript:void(0)" aria-expanded="true"><i
-                                class="ti-layout-sidebar-left"></i><span>Categorys
+                                class="fa fa-list-ul"></i><span>Categorys
                             </span></a>
                         <ul class="collapse">
-                            <li class="{{Route::is('admin.category.index') | Route::is('admin.category.edit') ? 'active' : ''}}"><a href="{{route('admin.category.index')}}">All Brand</a></li>
+
+                            {{-- category --}}
+                            @if ($usr->can('category.create') || $usr->can('category.view') ||  $usr->can('category.edit') ||  $usr->can('category.delete'))
+                            <li class="{{Route::is('admin.category.index') | Route::is('admin.category.edit') ? 'active' : ''}}"><a href="{{route('admin.category.index')}}">All Category</a></li>
+                            @endif
+
+                            {{-- subcategory --}}
+                            @if ($usr->can('subcategory.create') || $usr->can('subcategory.view') ||  $usr->can('subcategory.edit') ||  $usr->can('subcategory.delete'))
+                            <li class="{{Route::is('admin.subcategory.index') | Route::is('admin.subcategory.edit') ? 'active' : ''}}"><a href="{{route('admin.subcategory.index')}}">All Sub-Category</a></li>
+                            @endif
+
+                            {{-- subsubcategory --}}
+                            @if ($usr->can('subsubcategory.create') || $usr->can('subsubcategory.view') ||  $usr->can('subsubcategory.edit') ||  $usr->can('subsubcategory.delete'))
+                            <li class="{{Route::is('admin.subsubcategory.index') | Route::is('admin.subsubcategory.edit') ? 'active' : ''}}"><a href="{{route('admin.subsubcategory.index')}}">All Sub-Sub-Category</a></li>
+                            @endif
                         </ul>
                     </li>
                     @endif
+
+                    {{-- product list --}}
+                    <li class="{{Route::is('admin.product.index') | Route::is('admin.product.edit') | Route::is('admin.product.create') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="fa fa-product-hunt"></i><span>Products </span></a>
+                        <ul class="collapse">
+
+                            {{-- Manage Product  --}}
+                            <li class="{{Route::is('admin.product.index') | Route::is('admin.product.edit') ? 'active' : ''}}"><a href="{{route('admin.product.index')}}">Manage Product</a></li>
+
+                            {{-- Add Product  --}}
+                            <li class="{{Route::is('admin.product.create')  ? 'active' : ''}}"><a href="{{route('admin.product.create')}}">Add Product</a></li>
+                        </ul>
+                    </li>
 
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i

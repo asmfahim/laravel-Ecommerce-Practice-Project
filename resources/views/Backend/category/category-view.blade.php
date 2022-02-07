@@ -46,14 +46,15 @@
                         <tbody>
                             @if (Auth::guard('admin')->user()->can('category.view'))
 
-                            @foreach ($category as  $row)
+                            @foreach ($categories as  $row)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td><span style="font-size:20px;"><i class="{{$row->category_icon}}"></i></span></td>
+                                <td><span style="font-size:20px;"><i class="{{$row->category_icon}}" aria-hidden="true"></i></span></td>
                                 <td>{{$row->category_name_en}}</td>
                                 <td>
                                     <ul class="d-flex justify-content-center">
                                         @if (Auth::guard('admin')->user()->can('category.edit'))
+
                                             <li class="mr-2 h5"><a href="{{route('admin.category.edit',$row->id)}}" class="text-secondary"><i class="fa fa-edit"></i></a></li>
                                         @endif
                                         @if (Auth::guard('admin')->user()->can('category.delete'))
