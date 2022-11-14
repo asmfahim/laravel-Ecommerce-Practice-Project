@@ -72,7 +72,7 @@ class BrandController extends Controller
     }
 
     public function Brand_Update(Request $request, $id){
-        
+
         if (is_null($this->user) || !$this->user->can('brand.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to Edit any Brand !'); }
 

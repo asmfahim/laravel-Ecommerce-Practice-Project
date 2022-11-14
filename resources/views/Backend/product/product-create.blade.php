@@ -3,6 +3,34 @@
 @section('title','SUB-SUB-CATEGORY')
 @section('styles')
 <link rel="stylesheet" href="{{asset("public/Backend/assets/src/bootstrap-tagsinput.css")}}">
+{{-- <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link type="text/css" rel="stylesheet" href="http://example.com/image-uploader.min.css"> --}}
+<style>
+
+    .image-container,.thumb-container{
+        height:100px;
+        width: 160px;
+        border-radius: 6px;
+        margin-left: 5px;
+        margin-top: 5px;
+        overflow: hidden;
+    }
+    .image-container img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    .thumb-container img{
+        object-fit: cover;
+    }
+    .image-container span , .thumb-container span{
+        top: -6px;
+        right: 8px;
+        color: red;
+        font-size: 28px;
+        cursor: pointer;
+    }
+</style>
 @endsection
 
 @section('page-title')
@@ -34,7 +62,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Add Product</h4>
-                                <form>
+                                <form method="POST" action="{{route("admin.product.store")}}" enctype="multipart/form-data">
+                                    @csrf
                                     {{-- 1st row  --}}
                                     <div class=" form-row">
                                         <div class="form-group col-md-4">
@@ -115,16 +144,41 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="product_thambnail">Main Thambnail</label><br>
-                                            <input type="file" class="form-control @error('product_thambnail') is-invalid @enderror" id="product_thambnail" name="product_thambnail" >
+                                            <input type="file" class="form-control @error('product_thambnail') is-invalid @enderror" id="product_thambnail" name="product_thambnail"  accept="image/png, image/jpeg, image/gif" >
+
                                         </div>
 
                                         <div class="form-group col-md-4">
                                             <label for="multi_img">Multiple Image</label><br>
-                                            <input type="file" class="form-control @error('multi_img') is-invalid @enderror" id="multi_img" name="multi_img[]" >
+                                            <input type="file" class="form-control @error('multi_img') is-invalid @enderror" id="multi_img" name="multi_img[]" multiple="" onchange="multi_imgs()" accept="image/png, image/jpeg, image/gif" >
+                                                <span class="btn btn-success" id="img_reselect" style="display: none;"  onclick="img_reset()">Reset Select</span>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="short_descp_en">Short Description</label>
                                             <textarea class="form-control @error('short_descp_en') is-invalid @enderror" name="short_descp_en" id="short_descp_en" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    {{-- row of image show --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <div class="card card-thumbnail" style="width: 100%; height:130px; border:1px solid #ddd; margin-top:35px; ">
+                                                <h6>Thumbnail</h6>
+                                                <div class="d-flex flex-wrap justify-content-start" >
+                                                    <div class="d-flex justify-content-center thumb-container position-relative">
+                                                        <img src="" alt="" id="thumb_img">
+                                                        {{-- <span class="position-absolute">&times;</span> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-8">
+
+                                            <div class="card card-thumbnail" style="width: 100%; min-height:130px; border:1px solid #ddd; margin-top:35px; " >
+                                                <h6>Multi-image</h6>
+                                                <div class="d-flex flex-wrap justify-content-start" id="image_multi">
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -178,6 +232,9 @@
 
 @section('scripts')
 
+{{-- <script type="text/javascript" src="http://example.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://example.com/image-uploader.min.js"></script> --}}
+
 {{-- Sub Category ajax --}}
 <script type="text/javascript">
     $(document).ready(function(){
@@ -218,7 +275,11 @@
         });
     });
 
-    $(document).ready(function(){
+
+   </script>
+    {{-- sub sub category ajax --}}
+<script type="text/javascript">
+ $(document).ready(function(){
         $('select[name="subcategory_id"]').on('change',function(){
            let subcategory_id = $(this).val();
            if(subcategory_id){
@@ -251,10 +312,69 @@
         });
     });
 
-   </script>
-{{-- sub sub category ajax --}}
-<script type="text/javascript">
 
+   </script>
+   {{-- Thumbnail image  --}}
+   <script type="text/javascript">
+        $(document).ready(function(){
+        $('#product_thambnail').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+               $('#thumb_img').attr('src',e.target.result).width(100).height(100);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+   </script>
+   {{-- multi_imgae --}}
+   <script type="text/javascript">
+        var images = [];
+        // var a = [];
+        function multi_imgs(){
+            var image = document.getElementById("multi_img").files;
+            for( i =0; i<image.length; i++){
+                images.push({
+                    "name" : image[i].name,
+                    "url" : URL.createObjectURL(image[i]),
+                    "file" : image[i],
+                });
+                // a[i] = image[i];
+            }
+            // document.getElementById('multi_img').refresh();
+            console.log(images);
+
+            if(images != null){
+                document.getElementById('img_reselect').style.display = "block";
+                document.getElementById("image_multi").innerHTML = img_show();
+            }
+        }
+        function img_reset(){
+            document.getElementById('multi_img').value = null;
+            document.getElementById("image_multi").innerHTML = img_refresh();
+            images =[];
+            multi_imgs();
+            document.getElementById('img_reselect').style.display = "none";
+        }
+        function img_show(){
+            var image = "";
+            images.forEach((i) => {
+                image +=  '<div class="d-flex justify-content-center image-container position-relative"><img src="'+i.url +'"  alt=""> </div>';
+                // <span class="position-absolute" onclick= "img_delete('+images.indexOf(i)+')">&times;</span></div>'
+            });
+            return image;
+        }
+        function img_refresh(){
+            var image = "";
+
+            return image;
+        }
+        // function img_delete(e){
+        //     images.splice(e,1);
+        //     // a.splice(e,1);
+        //     document.getElementById("image_multi").innerHTML = img_show();
+        //     document.getElementById("multi_img").value = images.file;
+
+        // }
 
    </script>
 
