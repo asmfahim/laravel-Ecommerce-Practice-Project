@@ -1,6 +1,6 @@
 @extends('Backend.layouts.app')
 
-@section('title','SUB-SUB-CATEGORY')
+@section('title','PRODUCT EDIT')
 @section('styles')
 <link rel="stylesheet" href="{{asset("public/Backend/assets/src/bootstrap-tagsinput.css")}}">
 <style>
