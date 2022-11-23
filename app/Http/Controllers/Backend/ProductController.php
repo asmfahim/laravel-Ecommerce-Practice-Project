@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use App\Models\Product;
 use App\Models\MultiImg;
 use Illuminate\Http\Request;
@@ -23,7 +25,8 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view('Backend.product.product-view');
+        $products =Product::latest()->get();
+        return view('Backend.product.product-view',compact('products'));
 
     }
 
@@ -64,12 +67,12 @@ class ProductController extends Controller
         ]);
 
         $image = $request->file('product_thambnail');
-        $input['imagename'] = hexdec(uniqid()).$image->getClientOriginalName();
+        $imagename = hexdec(uniqid()).$image->getClientOriginalName();
         $location = public_path("upload/products/thambnail");
         // dd($image->getPathname());
         $imgs = Image::make($image->getPathname());
-        $imgs->resize(917 , 1000, function ($constraint) { $constraint->aspectRatio(); })->save($location.'/'.$input['imagename']);
-        $save_url = $input['imagename'];
+        $imgs->resize(917 , 1000, function ($constraint) { $constraint->aspectRatio(); })->save($location.'/'.$imagename);
+        $save_url = $imagename;
 
       $product_id =  Product::insertGetId([
             'brand_id' => $request->brand_id,
@@ -105,12 +108,12 @@ class ProductController extends Controller
         // Multi-image start
         $images = $request->file('multi_img');
         foreach ($images as $img) {
-            $input['imgname'] = hexdec(uniqid()).$img->getClientOriginalName();
+            $photoName = hexdec(uniqid()).$img->getClientOriginalName();
             $location = public_path("upload/products/multi_image");
             // dd($image->getPathname());
             $imges = Image::make($img->getPathname());
-            $imges->resize(917 , 1000, function ($constraint) { $constraint->aspectRatio(); })->save($location.'/'.$input['imgname']);
-            $save_path = $input['imgname'];
+            $imges->resize(917 , 1000, function ($constraint) { $constraint->aspectRatio(); })->save($location.'/'.$photoName);
+            $save_path = $photoName;
 
             MultiImg::Insert([
                 'product_id' =>$product_id ,
@@ -122,7 +125,7 @@ class ProductController extends Controller
 
 
         session()->flash('success', 'Product has been Inserted !!');
-        return redirect()->route('admin.product.create');
+        return redirect()->route('admin.product.index');
 
         //
     }
@@ -147,7 +150,12 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
-        return view('Backend.product.product-edit');
+        $brands = Brand::latest()->get();
+        $categories = Category::latest()->get();
+        $subCategories = SubCategory::latest()->get();
+        $subSubCategories = SubSubCategory::latest()->get();
+        $products = Product::findOrFail($id);
+        return view('Backend.product.product-edit',compact('brands','categories','subCategories','subSubCategories','products'));
 
     }
 
