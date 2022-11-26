@@ -60,7 +60,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Edit Product</h4>
-                                <form method="POST" action="{{route("admin.product.store")}}" enctype="multipart/form-data">
+                                <form method="POST" action="{{route('admin.product.update',$products->id)}}">
+                                    @method('PUT')
                                     @csrf
                                     {{-- 1st row  --}}
                                     <div class=" form-row">
@@ -189,6 +190,55 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- basic form end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-ml-12">
+        <div class="row">
+            <div class="col-lg-6 col-ml-12">
+                <div class="row">
+                    <!-- basic form start -->
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title text-right">EDIT MULTI IMAGE </h4>
+
+                                <form method="POST" action="{{route('admin.product.update',$products->id)}}" enctype="multipart/form-data">
+                                    @method('PUT')
+                                    @csrf
+                                    {{-- 1st row  --}}
+                                    <div class=" row row-sm">
+                                        @foreach ($multiimgs as $mImg )
+                                            <div class=" col-md-3 ml-5">
+                                                <div class="card bg-light">
+                                                    <img src="{{asset('public/upload/products/multi_image/'.$mImg->photo_name)}}" width="130px" height="180px" alt="" class="card-img-top">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center">
+                                                            <a href="" class="btn btn-sm btn-danger" id="Delete" title="Delete Data">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </h5>
+                                                        <p class="card-text">
+                                                            <div class="form-group">
+                                                                <label for="" class="form-group-label">Change Image <span class="text-danger">*</span> </label>
+                                                                <input type="file" class="form-control" name="multi_img[$mImg->id]">
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update Image</button>
                                 </form>
                             </div>
                         </div>

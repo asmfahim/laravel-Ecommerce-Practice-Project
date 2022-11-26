@@ -150,12 +150,14 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+        $multiimgs = MultiImg::where('product_id',$id)->get();
+
         $brands = Brand::latest()->get();
         $categories = Category::latest()->get();
         $subCategories = SubCategory::latest()->get();
         $subSubCategories = SubSubCategory::latest()->get();
         $products = Product::findOrFail($id);
-        return view('Backend.product.product-edit',compact('brands','categories','subCategories','subSubCategories','products'));
+        return view('Backend.product.product-edit',compact('brands','categories','subCategories','subSubCategories','products','multiimgs'));
 
     }
 
@@ -169,6 +171,38 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Product::findOrFail($id)->update([
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'subsubcategory_id' => $request->subsubcategory_id,
+
+            'product_name_en' => $request->product_name_en ,
+            'product_slug_en' => strtolower(str_replace(' ','-',$request->product_name_en)) ,
+            'product_code' => $request->product_code,
+            'product_qty' => $request->product_qty,
+
+            'product_tags_en' => $request->product_tags_en,
+            'product_size_en' => $request->product_size_en,
+            'product_color_en' => $request->product_color_en,
+            'selling_price' => $request->selling_price,
+            'discount_price' => $request->discount_price,
+
+            'short_descp_en' => $request->short_descp_en,
+            'long_descp_en' => $request->long_descp_en,
+
+            'hot_deals' => $request->hot_deals,
+            'featured' => $request->featured,
+            'special_offer' => $request->special_offer,
+            'special_deals' => $request->special_deals,
+
+            'status' => 1,
+            'created_at' => Carbon::now(),
+
+        ]);
+
+        session()->flash('success', 'Product has been Updated !! without image.');
+        return redirect()->route('admin.product.index');
     }
 
     /**
