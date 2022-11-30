@@ -201,6 +201,8 @@
     </div>
 </div>
 
+{{-- Multi Image start --}}
+
 <div class="row">
     <div class="col-lg-6 col-ml-12">
         <div class="row">
@@ -212,8 +214,7 @@
                             <div class="card-body">
                                 <h4 class="header-title text-right">EDIT MULTI IMAGE </h4>
 
-                                <form method="POST" action="{{route('admin.product.update',$products->id)}}" enctype="multipart/form-data">
-                                    @method('PUT')
+                                <form method="POST" action="{{route('admin.product.multiimg')}}" enctype="multipart/form-data">
                                     @csrf
                                     {{-- 1st row  --}}
                                     <div class=" row row-sm">
@@ -223,14 +224,14 @@
                                                     <img src="{{asset('public/upload/products/multi_image/'.$mImg->photo_name)}}" width="130px" height="180px" alt="" class="card-img-top">
                                                     <div class="card-body">
                                                         <h5 class="card-title text-center">
-                                                            <a href="" class="btn btn-sm btn-danger" id="Delete" title="Delete Data">
+                                                            {{-- <a href="" class="btn btn-sm btn-danger" id="Delete" title="Delete Data">
                                                                 <i class="fa fa-trash"></i>
-                                                            </a>
+                                                            </a> --}}
                                                         </h5>
                                                         <p class="card-text">
                                                             <div class="form-group">
                                                                 <label for="" class="form-group-label">Change Image <span class="text-danger">*</span> </label>
-                                                                <input type="file" class="form-control" name="multi_img[$mImg->id]">
+                                                                <input type="file" class="form-control" name="multi_img[{{$mImg->id}}]">
                                                             </div>
                                                         </p>
                                                     </div>
@@ -250,6 +251,59 @@
     </div>
 </div>
 
+{{-- Thambnail image start --}}
+<div class="row">
+    <div class="col-lg-6 col-ml-12">
+        <div class="row">
+            <div class="col-lg-6 col-ml-12">
+                <div class="row">
+                    <!-- basic form start -->
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title text-left">EDIT THAMBNAIL IMAGE </h4>
+
+                                <form method="POST" action="{{route('admin.product.thambnail',$products->id)}}" enctype="multipart/form-data">
+                                    @method('PUT')
+                                    @csrf
+                                    {{-- 1st row  --}}
+                                    <div class=" row row-sm">
+                                            <div class=" col-md-4 ml-5">
+                                                <div class="card bg-light">
+                                                    <img src="{{asset('public/upload/products/thambnail/'.$products->product_thambnail)}}" width="130px" height="180px" alt="" class="card-img-top">
+                                                    <div class="card-body">
+                                                        <p class="card-text">
+                                                            <div class="form-group">
+                                                                <label for="" class="form-group-label">Change Image <span class="text-danger">*</span> </label>
+                                                                <input type="file" class="form-control" id="thambnail_img" name="thambnail_img">
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- Thambnail preview --}}
+                                            <div class=" col-md-4 ml-5">
+                                                <div class="card bg-light" id="thamb_div" style="display: none">
+                                                    <img src="" id="thamb_img" width="150px" height="200px" style="display: none"  alt="" class="card-img-top">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">
+                                                            Thambnail Preview
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update Image</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- basic form end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 
@@ -338,10 +392,11 @@
    {{-- Thumbnail image  --}}
    <script type="text/javascript">
         $(document).ready(function(){
-        $('#product_thambnail').change(function(e){
+        $('#thambnail_img').change(function(e){
             var reader = new FileReader();
             reader.onload = function(e){
-               $('#thumb_img').attr('src',e.target.result).width(100).height(100);
+                $('#thamb_div').css("display","block");
+               $('#thamb_img').attr('src',e.target.result).css("display", "block");
             }
             reader.readAsDataURL(e.target.files['0']);
         });

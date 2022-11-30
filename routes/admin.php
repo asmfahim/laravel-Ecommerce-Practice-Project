@@ -83,6 +83,11 @@ Route::get('/', function () {
 
         //Product Routes
         Route::resource('/product', ProductController::class,['names' => 'admin.product'])->except(['show']);
+        Route::post('/product/multiimg/',[ProductController::class,'multiimgupdate'])->name('admin.product.multiimg');
+        Route::put('/product/thambnail/{id}',[ProductController::class,'thambnailupdate'])->name('admin.product.thambnail');
+        Route::get('/product/inactive/{id}',[ProductController::class,'product_inactive'])->name('admin.product.inactive');
+        Route::get('/product/active/{id}',[ProductController::class,'product_active'])->name('admin.product.active');
+
 
 
 

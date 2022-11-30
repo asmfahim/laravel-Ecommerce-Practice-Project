@@ -39,7 +39,10 @@
                             <tr>
                                 <th>Product Image</th>
                                 <th>Product Name</th>
+                                <th>Product Price</th>
+                                <th>Product Discount</th>
                                 <th>Quantity</th>
+                                <th>Product Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -50,7 +53,26 @@
                             <tr>
                                 <td><img src="{{asset('public/upload/products/thambnail/'.$row->product_thambnail)}}" style="border-radius:5px; width: 60px; height:50px" alt=""></td>
                                 <td>{{$row->product_name_en}}</td>
-                                <td>{{$row->product_qty}}</td>
+                                <td>{{$row->selling_price . ' ' }} ৳</td>
+                                <td>
+                                    @if ($row->discount_price == NULL)
+                                    <span class="badge badge-pill badge-danger">No Discount</span>
+                                    @else
+                                    @php
+                                        $amount = $row->selling_price - $row->discount_price;
+                                        $discount = ($amount/$row->selling_price) * 100;
+                                    @endphp
+                                    <span class="badge badge-pill badge-danger">{{round($discount) .' ' }} %</span>
+                                    @endif
+                                </td>
+                                <td>{{$row->product_qty . ' '}}Pic</td>
+                                <td>
+                                    @if ($row->status == 1)
+                                    <span class="badge badge-pill badge-success">Active</span>
+                                    @else
+                                    <span class="badge badge-pill badge-danger">InActive</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <ul class="d-flex justify-content-center">
                                         @if (Auth::guard('admin')->user()->can('product.edit'))
@@ -58,7 +80,7 @@
                                             <li class="mr-2 h5"><a href="{{route('admin.product.edit',$row->id)}}" class="text-secondary"><i class="fa fa-edit"></i></a></li>
                                         @endif
                                         @if (Auth::guard('admin')->user()->can('product.delete'))
-                                            <li class="h5">
+                                            <li class="mr-2 h5">
                                                 <a href="{{route('admin.product.destroy',$row->id)}}" class="text-danger" onclick="show_confirm('delete-form-{{$row->id}}')">
                                                     <i class="ti-trash"></i>
                                                 </a>
@@ -68,6 +90,12 @@
                                                     @csrf
                                                 </form>
                                             </li>
+                                        @endif
+
+                                        @if ($row->status == 1)
+                                        <li class=" h5"><a href="{{route('admin.product.inactive',$row->id)}}" class="text-danger"><i class="fa fa-arrow-down"></i></a></li>
+                                        @else
+                                        <li class=" h5"><a href="{{route('admin.product.active',$row->id)}}" class="text-success"><i class="fa fa-arrow-up"></i></a></li>
                                         @endif
 
                                     </ul>
@@ -91,7 +119,7 @@
     function show_confirm(id){
         event.preventDefault();
         Swal.fire({
-            title: 'Are you sure you want to delete this record?',
+            title: 'Are you sure, you want to delete this record?',
             text: 'If you delete this, it will be gone forever.',
             icon: 'warning',
             showCancelButton: true,

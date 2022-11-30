@@ -205,6 +205,64 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index');
     }
 
+    public function multiimgupdate(Request $request){
+        $imgs = $request->multi_img;
+        foreach($imgs as $id=> $img){
+            $imgDel = MultiImg::findOrFail($id);
+            unlink(public_path('upload/products/multi_image/'.$imgDel->photo_name));
+            $image_name = hexdec(uniqid()).$img->getClientOriginalName();
+            $path = public_path("upload/products/multi_image");
+            $imgs_make = Image::make($img->getPathname());
+            $imgs_make->resize(917 , 1000, function ($constraint) { $constraint->aspectRatio(); })->save($path.'/'.$image_name);
+            $update_url = $image_name;
+
+            MultiImg::where('id',$id)->update([
+                'photo_name'=>$update_url,
+                'updated_at'=>Carbon::now(),
+            ]);
+        }
+        session()->flash('success', 'Product Image has been Updated !!');
+        return redirect()->back();
+    }
+
+    public function thambnailupdate(Request $request,$id){
+        $thamb_Img = Product::findOrFail($id);
+        $img_thamb = $request->thambnail_img;
+        unlink(public_path('upload/products/thambnail/'.$thamb_Img->product_thambnail));
+        $thamb_image_name = hexdec(uniqid()).$img_thamb->getClientOriginalName();
+        $path = public_path("upload/products/thambnail");
+        $imgs_makes = Image::make($img_thamb->getPathname());
+        $imgs_makes->resize(917 , 1000, function ($constraint) { $constraint->aspectRatio(); })->save($path.'/'.$thamb_image_name);
+        $update_path = $thamb_image_name;
+
+        Product::where('id',$id)->update([
+            'product_thambnail'=>$update_path,
+            'updated_at'=>Carbon::now(),
+        ]);
+        session()->flash('success', 'Product Thambnail has been Updated !!');
+        return redirect()->back();
+    }
+
+    public function product_inactive($id){
+
+        Product::findOrFail($id)->update([
+            'status' => 0
+        ]);
+
+        session()->flash('success', 'Productn Inactivated !!');
+        return redirect()->back();
+    }
+
+    public function product_active($id){
+
+        Product::findOrFail($id)->update([
+            'status' => 1
+        ]);
+
+        session()->flash('success', 'Product Activated !!');
+        return redirect()->back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -214,5 +272,18 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $product = Product::findOrFail($id);
+        unlink(public_path('upload/products/thambnail/'.$product->product_thambnail));
+        // File::delete(public_path('upload/products/thambnail/'.$product->producth_thambnail));
+        Product::findOrFail($id)->delete();
+        $multi_image = MultiImg::where('product_id',$id)->get();
+        foreach($multi_image as $img_multi){
+            unlink(public_path('upload/products/multi_image/'.$img_multi->photo_name));
+            // File::delete(public_path('upload/products/multi_image/'.$img->photo_name));
+            MultiImg::where('product_id',$id)->delete();
+        }
+
+        session()->flash('success', 'Product has been deleted !!');
+        return redirect()->back();
     }
 }
