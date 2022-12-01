@@ -96,13 +96,53 @@
                         <ul class="collapse">
 
                             {{-- Manage Product  --}}
+                            @if ( $usr->can('product.view') ||  $usr->can('product.edit') ||  $usr->can('product.delete'))
                             <li class="{{Route::is('admin.product.index') | Route::is('admin.product.edit') ? 'active' : ''}}"><a href="{{route('admin.product.index')}}">Manage Product</a></li>
+                            @endif
 
                             {{-- Add Product  --}}
+                            @if ($usr->can('product.create'))
                             <li class="{{Route::is('admin.product.create')  ? 'active' : ''}}"><a href="{{route('admin.product.create')}}">Add Product</a></li>
+                            @endif
                         </ul>
                     </li>
 
+                    {{-- Sidebar --}}
+                    <li class="{{Route::is('admin.slider.index') | Route::is('admin.slider.edit') | Route::is('admin.slider.create') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Slider </span></a>
+                        <ul class="collapse">
+
+                            {{-- Manage Product  --}}
+                            @if ( $usr->can('slider.view') ||  $usr->can('slider.edit') ||  $usr->can('slider.delete'))
+                            <li class="{{Route::is('admin.slider.index') | Route::is('admin.slider.edit') ? 'active' : ''}}"><a href="{{route('admin.slider.index')}}">Manage Slider</a></li>
+                            @endif
+
+                        </ul>
+                    </li>
+
+
+                    {{-- demo --}}
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Sidebar
+                                Types
+                            </span></a>
+                        <ul class="collapse">
+                            <li><a href="index.html">Left Sidebar</a></li>
+                            <li><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Sidebar
+                                Types
+                            </span></a>
+                        <ul class="collapse">
+                            <li><a href="index.html">Left Sidebar</a></li>
+                            <li><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i
                                 class="ti-layout-sidebar-left"></i><span>Sidebar

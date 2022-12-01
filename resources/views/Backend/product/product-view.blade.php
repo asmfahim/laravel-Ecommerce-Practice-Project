@@ -8,6 +8,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
 @endsection
 
+@php
+    $usr = Auth::guard('admin')->user();
+@endphp
+
 @section('page-title')
 <div class="page-title-area">
     <div class="row align-items-center">

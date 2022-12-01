@@ -3,8 +3,8 @@
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Backend\Auth\LoginController;
     use App\Http\Controllers\Backend\AdminController;
-use App\Http\Controllers\Backend\AjaxController;
-use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
+    use App\Http\Controllers\Backend\AjaxController;
+    use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
     use App\Http\Controllers\Backend\Auth\ResetPasswordController;
     use App\Http\Controllers\Backend\Auth\ConfirmPasswordController;
     use App\Http\Controllers\Backend\BrandController;
@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
     use App\Http\Controllers\Backend\ProductController;
     use App\Http\Controllers\Backend\ProfileController;
     use App\Http\Controllers\Backend\RolesController;
+    use App\Http\Controllers\Backend\SliderController;
     use App\Http\Controllers\Backend\SubCategoryController;
     use App\Http\Controllers\Backend\SubSubCategoryController;
     use App\Http\Controllers\Backend\UserController;
@@ -87,6 +88,12 @@ Route::get('/', function () {
         Route::put('/product/thambnail/{id}',[ProductController::class,'thambnailupdate'])->name('admin.product.thambnail');
         Route::get('/product/inactive/{id}',[ProductController::class,'product_inactive'])->name('admin.product.inactive');
         Route::get('/product/active/{id}',[ProductController::class,'product_active'])->name('admin.product.active');
+
+        // Slider Routes
+        Route::resource('/slider', SliderController::class,['names' => 'admin.slider'])->except(['create','show']);
+        Route::get('/slider/inactive/{id}',[SliderController::class,'slider_inactive'])->name('admin.slider.inactive');
+        Route::get('/slider/active/{id}',[SliderController::class,'slider_active'])->name('admin.slider.active');
+
 
 
 

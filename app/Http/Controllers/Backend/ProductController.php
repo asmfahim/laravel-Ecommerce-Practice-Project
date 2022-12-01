@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -17,6 +18,18 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
+
+
+    public $user;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::guard('admin')->user();
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +37,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('product.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any Admin view !'); }
         //
         $products =Product::latest()->get();
         return view('Backend.product.product-view',compact('products'));
@@ -37,6 +52,8 @@ class ProductController extends Controller
      */
     public function create()
     {
+        if (is_null($this->user) || !$this->user->can('product.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any product create !'); }
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
         return view('Backend.product.product-create',compact('categories','brands'));
@@ -149,7 +166,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('product.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any product edit !'); }
+
         $multiimgs = MultiImg::where('product_id',$id)->get();
 
         $brands = Brand::latest()->get();
@@ -271,7 +290,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        if (is_null($this->user) || !$this->user->can('product.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any product delete !'); }
+
         $product = Product::findOrFail($id);
         unlink(public_path('upload/products/thambnail/'.$product->product_thambnail));
         // File::delete(public_path('upload/products/thambnail/'.$product->producth_thambnail));
