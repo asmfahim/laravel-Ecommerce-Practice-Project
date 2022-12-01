@@ -121,7 +121,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+        return view('Backend.slider.slider-edit',compact('slider'));
     }
 
     /**
@@ -133,7 +134,36 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('slider.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to Update any Slider !'); }
+
+        $request->validate([
+
+            'slider_img'   => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ],[
+            'slider_img.required' => 'Please select an image'
+        ]);
+        $slider = Slider::findOrFail($id);
+        unlink(public_path('upload/sliders/'.$slider->slider_img));
+
+        $img = $request->file('slider_img');
+        $imagename = hexdec(uniqid()).$img->getClientOriginalName();
+        $location = public_path("upload/sliders");
+        // dd($image->getPathname());
+        $imgs = Image::make($img->getPathname());
+        $imgs->resize(870 , 370, function ($constraint) { $constraint->aspectRatio(); })->save($location.'/'.$imagename);
+        $save_url = $imagename;
+
+        Slider::findOrFail($id)->update([
+            'slider_title' => $request->slider_title,
+            'slider_description' => $request->slider_description,
+            'slider_img' => $save_url,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        session()->flash('success', 'Slider successfully Updated !!');
+        return redirect()->route('admin.slider.index');
     }
 
     /**
@@ -144,6 +174,15 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('slider.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any Slider delete !'); }
+
+        $slider_del = Slider::findOrFail($id);
+
+        unlink(public_path('upload/sliders/'.$slider_del->slider_img));
+        Slider::findOrFail($id)->delete();
+
+        session()->flash('success', 'Slider deleted Successfully !!');
+        return redirect()->back();
     }
 }

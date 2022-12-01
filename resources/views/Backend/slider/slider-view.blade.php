@@ -50,7 +50,13 @@
                             @foreach ($sliders as  $row)
                             <tr>
                                 <td><img src="{{asset('public/upload/sliders/'.$row->slider_img)}}" alt="" style="width: 70px; height:60px; border-radius:5px;"></td>
-                                <td>{{$row->slider_title}}</td>
+                                <td>
+                                    @if ($row->slider_title == NULL)
+                                        <span class="badge badge-pill badge-danger">No Title</span>
+                                    @else
+                                        {{$row->slider_title}}
+                                    @endif
+                                </td>
                                 <td>{{$row->slider_description}}</td>
                                 <td>
                                     @if ($row->status == 1)
@@ -65,7 +71,7 @@
                                             <li class="mr-2 h5"><a href="{{route('admin.slider.edit',$row->id)}}" class="text-secondary"><i class="fa fa-edit"></i></a></li>
                                         @endif
                                         @if (Auth::guard('admin')->user()->can('slider.delete'))
-                                            <li class="h5">
+                                            <li class="h5 mr-2">
                                                 <a href="{{route('admin.slider.destroy',$row->id)}}" class="text-danger" onclick="show_confirm('delete-form-{{$row->id}}')">
                                                     <i class="ti-trash"></i>
                                                 </a>
@@ -104,16 +110,20 @@
                     <form method="post" action="{{route('admin.slider.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                        <label for="brand_name">Slider Title <span class="text-danger">*</span></label>
+                        <label for="slider_title">Slider Title <span class="text-danger"> *</span></label>
                         <input type="text" class="form-control @error('slider_title') is-invalid @enderror" id="slider_title" name="slider_title" placeholder="Slider Title">
                         </div>
                         <div class="form-group">
-                            <label for="brand_name">Description <span class="text-danger">*</span></label>
+                            <label for="slider_description">Description <span class="text-danger"> *</span></label>
                             <input type="text" class="form-control @error('slider_title') is-invalid @enderror" id="slider_description" name="slider_description" placeholder="Description">
                             </div>
                         <div class="form-group">
-                        <label for="brand_image">Slider Image <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control @error('slider_img') is-invalid @enderror" id="brand_image" name="slider_img">
+                            <label for="slider_img">Slider Image <span class="text-danger"> *</span></label>
+                            <input type="file" class="form-control @error('slider_img') is-invalid @enderror" id="slider_img" name="slider_img">
+                        </div>
+                        <div class="form-group" style="display: none" id="slider_prev_div">
+                            <label for="slider_preview">Slider Image Preview </label>
+                                <img src="" id="slider_preview" alt="" width="150" height="150" >
                         </div>
                         <button type="submit" class="btn btn-primary">Add New</button>
                     </form>
@@ -129,6 +139,20 @@
 @endsection
 
 @section('scripts')
+{{-- Slider Preview --}}
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#slider_img').change(function(e){
+        var reader = new FileReader();
+        reader.onload = function(e){
+            $('#slider_prev_div').css("display","block");
+           $('#slider_preview').attr('src',e.target.result).width(150).height(150);
+        }
+        reader.readAsDataURL(e.target.files['0']);
+    });
+});
+</script>
+
 <script>
     function show_confirm(id){
         event.preventDefault();

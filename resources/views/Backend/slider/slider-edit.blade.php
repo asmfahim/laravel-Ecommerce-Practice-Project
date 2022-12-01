@@ -1,8 +1,11 @@
 @extends('Backend.layouts.app')
 
-@section('title','Sliders')
+@section('title','SLIDERS')
 @section('styles')
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
 @endsection
 
 @section('page-title')
@@ -26,27 +29,40 @@
 @section('content')
 <div class="row">
     <!-- data table start -->
-    <div class="col-md-8 mt-5">
+    <div class="col-md-12 mt-5">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Edit Sliders</h4>
-                <div class="data-tables">
-                    <form method="post" action="{{route('admin.slider.update',$brand->id)}}" enctype="multipart/form-data">
-                        @method('PUT')
-                        @csrf
-                        <div class="form-group">
-                        <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('brand_name_en') is-invalid @enderror" id="brand_name_en" name="brand_name_en" value="{{$brand->brand_name_en}}">
+                <h4 class="header-title">Slider Update </h4>
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h4 class="header-title">Edit Slider</h4>
+                        @if (Auth::guard('admin')->user()->can('slider.edit'))
+
+                        <div class="data-tables">
+                            <form method="post" action="{{route('admin.slider.update',$slider->id)}}" enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+                                <div class="form-group">
+                                <label for="slider_title">Slider Title <span class="text-danger"> *</span></label>
+                                <input type="text" class="form-control @error('slider_title') is-invalid @enderror" value="{{$slider->slider_title}}" id="slider_title" name="slider_title" placeholder="Slider Title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="slider_description">Description <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control @error('slider_title') is-invalid @enderror" id="slider_description" name="slider_description" value="{{$slider->slider_description}}" placeholder="Description">
+                                    </div>
+                                <div class="form-group">
+                                <label for="slider_img">Slider Image <span class="text-danger"> *</span></label>
+                                <input type="file" class="form-control @error('slider_img') is-invalid @enderror" id="slider_img" name="slider_img">
+                                </div>
+                                <div class="form-group">
+                                    <label for="slider_preview">Slider Image Preview </label>
+                                        <img src="{{asset('public/upload/sliders/'.$slider->slider_img)}}" style="display: block" id="slider_preview" alt="" width="150" height="150" >
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
                         </div>
-                        <div class="form-group">
-                        <label for="brand_image">Brand Image <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control @error('brand_image') is-invalid @enderror" id="brand_image" name="brand_image">
-                        </div>
-                        <div class="form-group">
-                            <img src="{{asset('public/upload/brand/'. $brand->brand_image)}}" id="showImage" height="100" width="100" style="border-radius: 5px;" alt="">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,17 +73,46 @@
 @endsection
 
 @section('scripts')
+{{-- Image Preview --}}
 
-<script>
+<script type="text/javascript">
     $(document).ready(function(){
-        $('#brand_image').change(function(e){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#showImage').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
+    $('#slider_img').change(function(e){
+        var reader = new FileReader();
+        reader.onload = function(e){
+           $('#slider_preview').attr('src',e.target.result).width(150).height(150);
+        }
+        reader.readAsDataURL(e.target.files['0']);
     });
+});
 </script>
 
+<script>
+    function show_confirm(id){
+        event.preventDefault();
+        Swal.fire({
+            title: 'Are you sure you want to delete this record?',
+            text: 'If you delete this, it will be gone forever.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            document.getElementById(id).submit();
+            }
+        });
+    }
+</script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 @endsection
