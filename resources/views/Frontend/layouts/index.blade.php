@@ -18,322 +18,49 @@
             <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
             <nav class="yamm megamenu-horizontal">
               <ul class="nav">
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>Clothing</a>
-                  <ul class="dropdown-menu mega-menu">
-                    <li class="yamm-content">
-                      <div class="row">
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Dresses</a></li>
-                            <li><a href="#">Shoes </a></li>
-                            <li><a href="#">Jackets</a></li>
-                            <li><a href="#">Sunglasses</a></li>
-                            <li><a href="#">Sport Wear</a></li>
-                            <li><a href="#">Blazers</a></li>
-                            <li><a href="#">Shirts</a></li>
-                            <li><a href="#">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Handbags</a></li>
-                            <li><a href="#">Jwellery</a></li>
-                            <li><a href="#">Swimwear </a></li>
-                            <li><a href="#">Tops</a></li>
-                            <li><a href="#">Flats</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Winter Wear</a></li>
-                            <li><a href="#">Night Suits</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Toys &amp; Games</a></li>
-                            <li><a href="#">Jeans</a></li>
-                            <li><a href="#">Shirts</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">School Bags</a></li>
-                            <li><a href="#">Lunch Box</a></li>
-                            <li><a href="#">Footwear</a></li>
-                            <li><a href="#">Wipes</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Sandals </a></li>
-                            <li><a href="#">Shorts</a></li>
-                            <li><a href="#">Dresses</a></li>
-                            <li><a href="#">Jwellery</a></li>
-                            <li><a href="#">Bags</a></li>
-                            <li><a href="#">Night Dress</a></li>
-                            <li><a href="#">Swim Wear</a></li>
-                            <li><a href="#">Toys</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-                    </li>
-                    <!-- /.yamm-content -->
-                  </ul>
-                  <!-- /.dropdown-menu --> </li>
-                <!-- /.menu-item -->
 
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-laptop" aria-hidden="true"></i>Electronics</a>
-                  <!-- ================================== MEGAMENU VERTICAL ================================== -->
-                  <ul class="dropdown-menu mega-menu">
-                    <li class="yamm-content">
-                      <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-lg-4">
-                          <ul>
-                            <li><a href="#">Gaming</a></li>
-                            <li><a href="#">Laptop Skins</a></li>
-                            <li><a href="#">Apple</a></li>
-                            <li><a href="#">Dell</a></li>
-                            <li><a href="#">Lenovo</a></li>
-                            <li><a href="#">Microsoft</a></li>
-                            <li><a href="#">Asus</a></li>
-                            <li><a href="#">Adapters</a></li>
-                            <li><a href="#">Batteries</a></li>
-                            <li><a href="#">Cooling Pads</a></li>
-                          </ul>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-lg-4">
-                          <ul>
-                            <li><a href="#">Routers &amp; Modems</a></li>
-                            <li><a href="#">CPUs, Processors</a></li>
-                            <li><a href="#">PC Gaming Store</a></li>
-                            <li><a href="#">Graphics Cards</a></li>
-                            <li><a href="#">Components</a></li>
-                            <li><a href="#">Webcam</a></li>
-                            <li><a href="#">Memory (RAM)</a></li>
-                            <li><a href="#">Motherboards</a></li>
-                            <li><a href="#">Keyboards</a></li>
-                            <li><a href="#">Headphones</a></li>
-                          </ul>
-                        </div>
-                        <div class="dropdown-banner-holder"> <a href="#"><img alt="" src="{{asset('public/Frontend')}}/assets/images/banners/banner-side.png" /></a> </div>
-                      </div>
-                      <!-- /.row -->
-                    </li>
-                    <!-- /.yamm-content -->
-                  </ul>
-                  <!-- /.dropdown-menu -->
-                  <!-- ================================== MEGAMENU VERTICAL ================================== --> </li>
-                <!-- /.menu-item -->
+                @foreach ($categoris as $category )
 
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paw" aria-hidden="true"></i>Shoes</a>
-                  <ul class="dropdown-menu mega-menu">
-                    <li class="yamm-content">
-                      <div class="row">
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Dresses</a></li>
-                            <li><a href="#">Shoes </a></li>
-                            <li><a href="#">Jackets</a></li>
-                            <li><a href="#">Sunglasses</a></li>
-                            <li><a href="#">Sport Wear</a></li>
-                            <li><a href="#">Blazers</a></li>
-                            <li><a href="#">Shirts</a></li>
-                            <li><a href="#">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Handbags</a></li>
-                            <li><a href="#">Jwellery</a></li>
-                            <li><a href="#">Swimwear </a></li>
-                            <li><a href="#">Tops</a></li>
-                            <li><a href="#">Flats</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Winter Wear</a></li>
-                            <li><a href="#">Night Suits</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Toys &amp; Games</a></li>
-                            <li><a href="#">Jeans</a></li>
-                            <li><a href="#">Shirts</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">School Bags</a></li>
-                            <li><a href="#">Lunch Box</a></li>
-                            <li><a href="#">Footwear</a></li>
-                            <li><a href="#">Wipes</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Sandals </a></li>
-                            <li><a href="#">Shorts</a></li>
-                            <li><a href="#">Dresses</a></li>
-                            <li><a href="#">Jwellery</a></li>
-                            <li><a href="#">Bags</a></li>
-                            <li><a href="#">Night Dress</a></li>
-                            <li><a href="#">Swim Wear</a></li>
-                            <li><a href="#">Toys</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-                    </li>
-                    <!-- /.yamm-content -->
-                  </ul>
-                  <!-- /.dropdown-menu --> </li>
-                <!-- /.menu-item -->
+                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon  {{$category->category_icon}}" aria-hidden="true"></i>{{$category->category_name_en}}</a>
+                    <ul class="dropdown-menu mega-menu">
+                        <li class="yamm-content">
+                        <div class="row">
+                                    {{-- Sub Category list data --}}
+                    @php
+                    $subcategoris = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
+                    @endphp
+                    @foreach ($subcategoris as $subcategory)
 
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-clock-o"></i>Watches</a>
-                  <ul class="dropdown-menu mega-menu">
-                    <li class="yamm-content">
-                      <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-lg-4">
-                          <ul>
-                            <li><a href="#">Gaming</a></li>
-                            <li><a href="#">Laptop Skins</a></li>
-                            <li><a href="#">Apple</a></li>
-                            <li><a href="#">Dell</a></li>
-                            <li><a href="#">Lenovo</a></li>
-                            <li><a href="#">Microsoft</a></li>
-                            <li><a href="#">Asus</a></li>
-                            <li><a href="#">Adapters</a></li>
-                            <li><a href="#">Batteries</a></li>
-                            <li><a href="#">Cooling Pads</a></li>
-                          </ul>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-lg-4">
-                          <ul>
-                            <li><a href="#">Routers &amp; Modems</a></li>
-                            <li><a href="#">CPUs, Processors</a></li>
-                            <li><a href="#">PC Gaming Store</a></li>
-                            <li><a href="#">Graphics Cards</a></li>
-                            <li><a href="#">Components</a></li>
-                            <li><a href="#">Webcam</a></li>
-                            <li><a href="#">Memory (RAM)</a></li>
-                            <li><a href="#">Motherboards</a></li>
-                            <li><a href="#">Keyboards</a></li>
-                            <li><a href="#">Headphones</a></li>
-                          </ul>
-                        </div>
-                        <div class="dropdown-banner-holder"> <a href="#"><img alt="" src="{{asset('public/Frontend')}}/assets/images/banners/banner-side.png" /></a> </div>
-                      </div>
-                      <!-- /.row -->
-                    </li>
-                    <!-- /.yamm-content -->
-                  </ul>
-                  <!-- /.dropdown-menu --> </li>
-                <!-- /.menu-item -->
 
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-diamond"></i>Jewellery</a>
-                  <ul class="dropdown-menu mega-menu">
-                    <li class="yamm-content">
-                      <div class="row">
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Dresses</a></li>
-                            <li><a href="#">Shoes </a></li>
-                            <li><a href="#">Jackets</a></li>
-                            <li><a href="#">Sunglasses</a></li>
-                            <li><a href="#">Sport Wear</a></li>
-                            <li><a href="#">Blazers</a></li>
-                            <li><a href="#">Shirts</a></li>
-                            <li><a href="#">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Handbags</a></li>
-                            <li><a href="#">Jwellery</a></li>
-                            <li><a href="#">Swimwear </a></li>
-                            <li><a href="#">Tops</a></li>
-                            <li><a href="#">Flats</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Winter Wear</a></li>
-                            <li><a href="#">Night Suits</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Toys &amp; Games</a></li>
-                            <li><a href="#">Jeans</a></li>
-                            <li><a href="#">Shirts</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">School Bags</a></li>
-                            <li><a href="#">Lunch Box</a></li>
-                            <li><a href="#">Footwear</a></li>
-                            <li><a href="#">Wipes</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-12 col-md-3">
-                          <ul class="links list-unstyled">
-                            <li><a href="#">Sandals </a></li>
-                            <li><a href="#">Shorts</a></li>
-                            <li><a href="#">Dresses</a></li>
-                            <li><a href="#">Jwellery</a></li>
-                            <li><a href="#">Bags</a></li>
-                            <li><a href="#">Night Dress</a></li>
-                            <li><a href="#">Swim Wear</a></li>
-                            <li><a href="#">Toys</a></li>
-                          </ul>
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-                    </li>
-                    <!-- /.yamm-content -->
-                  </ul>
-                  <!-- /.dropdown-menu --> </li>
-                <!-- /.menu-item -->
+            {{-- Sub SubCategory list data --}}
+                    @php
+                        $subsubcategoris = App\Models\SubSubCategory::where('subcategory_id',$subcategory->id)->orderBy('subsubcategory_name_en','ASC')->get();
+                    @endphp
 
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-heartbeat"></i>Health and Beauty</a>
-                  <ul class="dropdown-menu mega-menu">
-                    <li class="yamm-content">
-                      <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-lg-4">
-                          <ul>
-                            <li><a href="#">Gaming</a></li>
-                            <li><a href="#">Laptop Skins</a></li>
-                            <li><a href="#">Apple</a></li>
-                            <li><a href="#">Dell</a></li>
-                            <li><a href="#">Lenovo</a></li>
-                            <li><a href="#">Microsoft</a></li>
-                            <li><a href="#">Asus</a></li>
-                            <li><a href="#">Adapters</a></li>
-                            <li><a href="#">Batteries</a></li>
-                            <li><a href="#">Cooling Pads</a></li>
-                          </ul>
+            <div class="col-sm-12 col-md-3">
+                <h2 class="title font-weight-bold" >{{strtoupper($subcategory->subcategory_name_en)}}</h2>
+                @foreach ($subsubcategoris as $subsubcategory )
+                    <ul class="links list-unstyled">
+                        <li><a href="#">{{strtoupper($subsubcategory->subsubcategory_name_en)}}</a></li>
+
+                    </ul>
+                @endforeach
+            </div>
+        @endforeach
+
+                            <!-- /.col -->
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-lg-4">
-                          <ul>
-                            <li><a href="#">Routers &amp; Modems</a></li>
-                            <li><a href="#">CPUs, Processors</a></li>
-                            <li><a href="#">PC Gaming Store</a></li>
-                            <li><a href="#">Graphics Cards</a></li>
-                            <li><a href="#">Components</a></li>
-                            <li><a href="#">Webcam</a></li>
-                            <li><a href="#">Memory (RAM)</a></li>
-                            <li><a href="#">Motherboards</a></li>
-                            <li><a href="#">Keyboards</a></li>
-                            <li><a href="#">Headphones</a></li>
-                          </ul>
-                        </div>
-                        <div class="dropdown-banner-holder"> <a href="#"><img alt="" src="{{asset('public/Frontend')}}/assets/images/banners/banner-side.png" /></a> </div>
-                      </div>
-                      <!-- /.row -->
-                    </li>
-                    <!-- /.yamm-content -->
-                  </ul>
-                  <!-- /.dropdown-menu --> </li>
-                <!-- /.menu-item -->
+                        <!-- /.row -->
+                        </li>
+                        <!-- /.yamm-content -->
+                    </ul>
+                    <!-- /.dropdown-menu --> </li>
+                    <!-- /.menu-item -->
+                @endforeach
+
+
+
+
 
                 <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paper-plane"></i>Kids and Babies</a>
                   <!-- /.dropdown-menu --> </li>
@@ -1124,32 +851,23 @@
 
           <div id="hero">
             <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-              <div class="item" style="background-image: url({{asset('public/Frontend')}}/assets/images/sliders/01.jpg);">
-                <div class="container-fluid">
-                  <div class="caption bg-color vertical-center text-left">
-                    <div class="slider-header fadeInDown-1">Top Brands</div>
-                    <div class="big-text fadeInDown-1"> New Collections </div>
-                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
-                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                @foreach ($sliders as $slider )
+
+                <div class="item" style="background-image: url({{asset('public/upload/sliders/'.$slider->slider_img)}});">
+                  <div class="container-fluid">
+                    <div class="caption bg-color vertical-center text-left">
+                      <div class="big-text fadeInDown-1"> {{$slider->slider_title}} </div>
+                      <div class="excerpt fadeInDown-2 hidden-xs"> <span>{{$slider->slider_description}} </span> </div>
+                      <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                    </div>
+                    <!-- /.caption -->
                   </div>
-                  <!-- /.caption -->
+                  <!-- /.container-fluid -->
                 </div>
-                <!-- /.container-fluid -->
-              </div>
+                @endforeach
               <!-- /.item -->
 
-              <div class="item" style="background-image: url({{asset('public/Frontend')}}/assets/images/sliders/02.jpg);">
-                <div class="container-fluid">
-                  <div class="caption bg-color vertical-center text-left">
-                    <div class="slider-header fadeInDown-1">Spring 2016</div>
-                    <div class="big-text fadeInDown-1"> Women <span class="highlight">Fashion</span> </div>
-                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
-                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
-                  </div>
-                  <!-- /.caption -->
-                </div>
-                <!-- /.container-fluid -->
-              </div>
+
               <!-- /.item -->
 
             </div>
