@@ -142,7 +142,7 @@ class ProductController extends Controller
 
 
         session()->flash('success', 'Product has been Inserted !!');
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.create');
 
         //
     }
