@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
-<title>FLY-MARKET  || @yield('title')</title>
+<title> @yield('title')</title>
 
 {{-- fav icon  --}}
 <link rel="shortcut icon" type="image/png" href="{{asset('public/Frontend')}}/assets/images/logo/logo3.png">

@@ -187,7 +187,9 @@
         @foreach ($subcategoris as $subcategory )
 
             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                <a href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
                 <h2 class="title">{{strtoupper($subcategory->subcategory_name_en)}}</h2>
+                </a>
 
                 @php
                 $subsubcategoris = App\Models\SubSubCategory::where('subcategory_id',$subcategory->id)->orderBy('subsubcategory_name_en','ASC')->get();
@@ -195,7 +197,7 @@
 
                 @foreach ( $subsubcategoris as $subsubcategory )
                     <ul class="links">
-                        <li><a href="#">{{strtoupper($subsubcategory->subsubcategory_name_en)}}</a></li>
+                        <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}">{{strtoupper($subsubcategory->subsubcategory_name_en)}}</a></li>
                     </ul>
                 @endforeach
             </div>

@@ -31,3 +31,15 @@ Route::middleware('auth')->group(function(){
     Route::put('profile/update/{id}', [HomeController::class,'update'])->name('profile.update');
     Route::put('profile/change/password/{id}', [HomeController::class,'change_password'])->name('profile.change.password');
 });
+
+// product details route
+Route::get('product/details/{id}/{slug}', [IndexController::class,'productdetails']);
+
+//Product Tags route
+Route::get('product/tag/{tag}', [IndexController::class,'TagWiseProduct']);
+
+//SubCategory Tags route
+Route::get('subcategory/product/{subcat_id}/{slug}', [IndexController::class,'SubCatWiseProduct']);
+
+//SubCategory Tags route
+Route::get('subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class,'SubSubCatWiseProduct']);

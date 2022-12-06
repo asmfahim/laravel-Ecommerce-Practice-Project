@@ -10,4 +10,16 @@ class MultiImg extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+        /**
+         * Get the user that owns the MultiImg
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+         */
+        public function product()
+        {
+            return $this->belongsTo(Product::class, 'product_id', 'id');
+        }
+
 }

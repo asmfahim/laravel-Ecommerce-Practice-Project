@@ -133,7 +133,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="product_tags_en">Product Tags</label><br>
-                                            <input type="text" class="form-control  @error('product_tags_en') is-invalid @enderror" id="product_tags_en" name="product_tags_en" value="demo1,demo2" data-role="tagsinput" value="{{$products->product_tags_en}}" >
+                                            <input type="text" class="form-control  @error('product_tags_en') is-invalid @enderror" id="product_tags_en" name="product_tags_en" data-role="tagsinput" value="{{$products->product_tags_en}}" >
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="product_size_en">Product Size</label><br>
