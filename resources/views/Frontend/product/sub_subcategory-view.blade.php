@@ -13,8 +13,8 @@
     <div class="container">
       <div class="breadcrumb-inner">
         <ul class="list-inline list-unstyled">
-          <li><a href="#">Home</a></li>
-          <li class="active">dhgh</li>
+          <li><a href="{{url('/')}}">Home</a></li>
+          <li class="active">Sub-Sub-Category</li>
         </ul>
       </div>
       <!-- /.breadcrumb-inner -->

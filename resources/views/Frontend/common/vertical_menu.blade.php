@@ -27,9 +27,9 @@ $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
                     @endphp
 
             <div class="col-sm-12 col-md-3">
-                <a href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
-                    <h2 class="title font-weight-bold" >{{strtoupper($subcategory->subcategory_name_en)}}</h2>
-                </a>
+
+                    <h2 class="title font-weight-bold" ><a style="padding: 0" href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">{{strtoupper($subcategory->subcategory_name_en)}}</a></h2>
+
 
                 @foreach ($subsubcategories as $subsubcategory )
                     <ul class="links list-unstyled">

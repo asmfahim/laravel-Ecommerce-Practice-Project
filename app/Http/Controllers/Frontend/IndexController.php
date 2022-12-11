@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\SubSubCategory;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImg;
@@ -39,7 +40,17 @@ class IndexController extends Controller
     public function productdetails($id,$slug){
         $multi_imgs = MultiImg::where('product_id',$id)->get();
         $product_details = Product::findOrFail($id);
-        return view('Frontend.product.product-details',compact('product_details','multi_imgs'));
+
+        $color_en = $product_details->product_color_en;
+		$product_color_en = explode(',', $color_en);
+
+        $size_en = $product_details->product_size_en;
+		$product_size_en = explode(',', $size_en);
+
+        $cat_id = $product_details->category_id;
+		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
+
+        return view('Frontend.product.product-details',compact('product_details','multi_imgs','product_color_en','product_size_en','relatedProduct'));
     }
 
     //Tag wise prodect
@@ -62,6 +73,7 @@ class IndexController extends Controller
 	public function SubSubCatWiseProduct($subsubcat_id,$slug){
 		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
+
 		return view('Frontend.product.sub_subcategory-view',compact('products','categories'));
 
 	}
