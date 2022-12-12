@@ -15,7 +15,7 @@
                         @endif
 
                         @else
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><img src="{{(!empty($user->profile_photo_path)) ? url('public/upload/user_images/'.$user->profile_photo_path) : url('public/upload/no_photo.png')}}" width="20" height="20" style="text-align:center; border-radius:50%"><span class="value">{{Auth::user()->username}} </span><b class="caret"></b></a>
+                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><img src="{{(!empty(Auth::user()->profile_photo_path)) ? url('public/upload/user_images/'.Auth::user()->profile_photo_path) : url('public/upload/no_photo.png')}}" width="20" height="20" style="text-align:center; border-radius:50%"><span class="value">{{ucwords(Auth::user()->username)}} </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                             <li><a href="{{route('profile')}}"><i class="fa fa-user"></i> Profile</a></li>
                             <li><a href="#">German</a></li>
@@ -31,7 +31,7 @@
               </div>
           <div class="cnt-account">
             <ul class="list-unstyled ">
-              <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+              <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
               <li ><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
               <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>

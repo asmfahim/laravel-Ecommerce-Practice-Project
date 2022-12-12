@@ -34,10 +34,10 @@
                         <div class="col-md-6">
                             <div class="profile-head ">
                                         <h5>
-                                            <strong>{{$user->name}}</strong>
+                                            <strong>{{ucwords($user->name)}}</strong>
                                         </h5>
                                         <h6>
-                                            <i style="color:tomato; font-size:14px">{{$user->username}}</i>
+                                            <i style="color:tomato; font-size:14px">{{ucwords($user->username)}}</i>
                                         </h6>
                                         <p class="proile-rating"> <span></span></p>
                                 <ul class="nav nav-tabs" >
@@ -76,7 +76,7 @@
                                     <label>User Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{$user->username}}</p>
+                                    <p class="text-primary">{{ucwords($user->username)}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -84,7 +84,7 @@
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{$user->name}}</p>
+                                    <p class="text-primary">{{ucwords($user->name)}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -92,7 +92,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{$user->email}}</p>
+                                    <p class="text-primary">{{ucwords($user->email)}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -100,7 +100,7 @@
                                     <label>Gender</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p style="text-transform: capitalize;">{{$user->gender}}</p>
+                                    <p class="text-primary" style="text-transform: capitalize;">{{$user->gender}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -108,7 +108,7 @@
                                     <label>Phone</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{$user->phone_number}}</p>
+                                    <p class="text-primary">{{$user->phone_number}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -116,7 +116,7 @@
                                     <label>Address</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{$user->address}}</p>
+                                    <p class="text-primary">{{ucwords($user->address)}}</p>
                                 </div>
                             </div>
 
