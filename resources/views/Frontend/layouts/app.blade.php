@@ -62,7 +62,7 @@
       <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel"><span id="pname"></span> </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -103,28 +103,29 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label class="text-muted" for="exampleFormControlSelect1">Choose Color</label>
-                <select class="form-control text-info" id="exampleFormControlSelect1" name="color">
+                <label class="text-muted" for="color">Choose Color</label>
+                <select class="form-control text-info" id="color" name="color">
 
-                </select>
-
+                </select>qty
+color
 
             </div>  <!-- // end form group -->
 
 
             <div class="form-group" id="sizeArea">
-            <label class="text-muted" for="exampleFormControlSelect1">Choose Size</label>
-            <select class="form-control text-info" id="exampleFormControlSelect1" name="size">
+            <label class="text-muted" for="size">Choose Size</label>
+            <select class="form-control text-info" id="size" name="size">
 
             </select>
           </div>  <!-- // end form group -->
 
             <div class="form-group">
-                <label class="text-muted" for="exampleFormControlInput1">Quantity</label>
-                <input type="number" class="form-control text-info" id="exampleFormControlInput1" value="1" min="1" >
+                <label class="text-muted" for="qty">Quantity</label>
+                <input type="number" class="form-control text-info" id="qty" value="1" min="1" >
             </div> <!-- // end form group -->
 
-        <button type="submit" class="btn btn-primary mb-2">Add to Cart</button>
+            <input type="hidden" id="product_id">
+            <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button>
 
 
         </div><!-- // end col md -->
@@ -168,7 +169,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('public/Frontend')}}/assets/js/wow.min.js"></script>
 <script src="{{asset('public/Frontend')}}/assets/js/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers:{
@@ -191,6 +193,9 @@ function productView(id){
             $('#pcategory').text(data.product.category.category_name_en);
             $('#pbrand').text(data.product.brand.brand_name_en);
             $('#pimage').attr('src','/laravel-Ecommerce-Practice-Project/public/upload/products/thambnail/'+data.product.product_thambnail);
+
+            $('#product_id').val(id);
+            $('#qty').val(1);
 
             // Product Price
             if (data.product.discount_price == null) {
@@ -233,8 +238,138 @@ function productView(id){
         }
     })
 
-}
+} //end product view with modal
+
+// Start Add To Cart Product
+function addToCart(){
+        var product_name = $('#pname').text();
+        var id = $('#product_id').val();
+        var color = $('#color option:selected').text();
+        var size = $('#size option:selected').text();
+        var quantity = $('#qty').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data:{
+                color:color, size:size, quantity:quantity, product_name:product_name
+            },
+            url: "/laravel-Ecommerce-Practice-Project/cart/data/store/"+id,
+            success:function(data){
+                $('#closeModel').click();
+                console.log(data)
+
+                // Start Message
+                const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'success',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success
+                    })
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: data.error
+                    })
+                }
+                // End Message
+
+            }
+        })
+    }
+
+
 </script>
+
+{{-- mini Cart part  --}}
+<script type="text/javascript">
+
+
+function miniCart(){
+        $.ajax({
+            type: 'GET',
+            url: '/laravel-Ecommerce-Practice-Project/product/mini/cart',
+            dataType:'json',
+            success:function(response){
+                // console.log(response)
+
+                $('span[id="cartSubTotal"]').text(response.cartTotal);
+                $('#cartQty').text(response.cartQty);
+                var miniCart = ""
+                $.each(response.carts, function(key,value){
+                    miniCart += `<div class="cart-item product-summary">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="image">
+                                     <a href="detail.html">
+                                        <img src="/laravel-Ecommerce-Practice-Project/public/upload/products/thambnail/${value.options.image}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <h3 class="name">
+                                    <a href="index.php?page-detail">${value.name}</a>
+                                </h3>
+                                <div class="price"> ${value.price} * ${value.qty}</div>
+                            </div>
+                            <div class="col-xs-1 action">
+                                <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div><!-- /.cart-item -->
+                    <div class="clearfix"></div>
+                    <hr>`
+        });
+
+                $('#miniCart').html(miniCart);
+
+            }
+        })
+     }
+
+     miniCart();
+
+
+      /// mini cart remove Start
+    function miniCartRemove(rowId){
+        $.ajax({
+            type: 'GET',
+            url: '/laravel-Ecommerce-Practice-Project/minicart/product-remove/'+rowId,
+            dataType:'json',
+            success:function(data){
+            miniCart();
+             // Start Message
+                const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'success',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success
+                    })
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: data.error
+                    })
+                }
+                // End Message
+            }
+        });
+    }
+ //  end mini cart remove
+
+
+</script> {{--End mini Cart part  --}}
 
 @yield('scripts')
 
