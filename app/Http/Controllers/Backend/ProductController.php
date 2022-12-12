@@ -76,9 +76,9 @@ class ProductController extends Controller
             'product_code'   => 'required',
             'product_qty'   => 'required',
             'selling_price'   => 'required',
-            
+
             'product_tags_en'   => 'required',
-            'product_size_en'   => 'required',
+            
             'product_thambnail'   => 'required',
             'short_descp_en'   => 'required',
         ]);
