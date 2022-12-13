@@ -6,7 +6,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="{{ $usr->can('dashboard.view') || $usr->can('dashboard.edit') ? route('admin.dashboard') : ''}}"><img src="{{asset('public/Backend')}}/assets/images/logo/logo3.png" alt="logo"></a>
+            <a href="{{ $usr->can('dashboard.view') || $usr->can('dashboard.edit') ? route('admin.dashboard') : ''}}"><h2>E-Market</h2></a>
         </div>
     </div>
     <div class="main-menu">
@@ -107,6 +107,20 @@
                         </ul>
                     </li>
 
+                    {{-- Sidebar --}}
+                    <li class="{{Route::is('admin.slider.index') | Route::is('admin.slider.edit') | Route::is('admin.slider.create') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="ti-layout-sidebar-left"></i><span>Slider </span></a>
+                        <ul class="collapse">
+
+                            {{-- Manage Product  --}}
+                            @if ( $usr->can('slider.view') ||  $usr->can('slider.edit') ||  $usr->can('slider.delete'))
+                            <li class="{{Route::is('admin.slider.index') | Route::is('admin.slider.edit') ? 'active' : ''}}"><a href="{{route('admin.slider.index')}}">Manage Slider</a></li>
+                            @endif
+
+                        </ul>
+                    </li>
+
                     {{-- Coupon part  --}}
                     @if ($usr->can('coupon.create') || $usr->can('coupon.view') ||  $usr->can('coupon.edit') ||  $usr->can('coupon.delete'))
 
@@ -122,19 +136,26 @@
 
                     {{-- End coupon part  --}}
 
-                    {{-- Sidebar --}}
-                    <li class="{{Route::is('admin.slider.index') | Route::is('admin.slider.edit') | Route::is('admin.slider.create') ? 'active' : '' }}">
+
+
+                    {{-- shipping part  --}}
+                    @if ($usr->can('shipping.create') || $usr->can('shipping.view') ||  $usr->can('shipping.edit') ||  $usr->can('shipping.delete'))
+
+                    <li class="{{Route::is('admin.shipping.index') | Route::is('admin.shipping.edit') ? 'active' : '' }}">
                         <a href="javascript:void(0)" aria-expanded="true"><i
-                                class="ti-layout-sidebar-left"></i><span>Slider </span></a>
+                                class="fa fa-truck"></i><span>Shipping
+                            </span></a>
                         <ul class="collapse">
+                            <li class="{{Route::is('admin.shipping.index') | Route::is('admin.shipping.edit') ? 'active' : ''}}"><a href="{{route('admin.shipping.index')}}">Shipping Division</a></li>
 
-                            {{-- Manage Product  --}}
-                            @if ( $usr->can('slider.view') ||  $usr->can('slider.edit') ||  $usr->can('slider.delete'))
-                            <li class="{{Route::is('admin.slider.index') | Route::is('admin.slider.edit') ? 'active' : ''}}"><a href="{{route('admin.slider.index')}}">Manage Slider</a></li>
-                            @endif
-
+                            <li class="{{Route::is('admin.shipping.district.index') | Route::is('admin.shipping.district.edit') ? 'active' : ''}}"><a href="{{route('admin.shipping.district.index')}}">Shipping District</a></li>
                         </ul>
                     </li>
+                    @endif
+
+                    {{-- End shipping part  --}}
+
+
 
 
                     {{-- demo --}}

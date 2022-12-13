@@ -18,6 +18,7 @@
     use App\Http\Controllers\Backend\SubSubCategoryController;
     use App\Http\Controllers\Backend\UserController;
     use App\Http\Controllers\Backend\CouponController;
+    use App\Http\Controllers\Backend\ShippingAreaController;
 
 Route::get('/', function () {
         return redirect()->route('admin.login.get');
@@ -99,8 +100,17 @@ Route::get('/', function () {
         Route::resource('/coupon', CouponController::class,['names' => 'admin.coupon'])->except(['create', 'show']);
 
 
+        //shipping division Routes
+        Route::resource('/shipping', ShippingAreaController::class,['names' => 'admin.shipping'])->except(['create', 'show']);
 
-
+        //Shiping District Routes
+        Route::prefix('shipping/district')->group(function(){
+        Route::get('/',[ShippingAreaController::class,'District_Index'])->name('admin.shipping.district.index');
+        Route::post('/store',[ShippingAreaController::class,'District_Store'])->name('admin.shipping.district.store');
+        Route::get('/edit/{id}',[ShippingAreaController::class,'District_Edit'])->name('admin.shipping.district.edit');
+        Route::put('/update/{id}',[ShippingAreaController::class,'District_Update'])->name('admin.shipping.district.update');
+        Route::delete('/destroy/{id}',[ShippingAreaController::class,'District_Destroy'])->name('admin.shipping.district.destroy');
+});
 
 
 
