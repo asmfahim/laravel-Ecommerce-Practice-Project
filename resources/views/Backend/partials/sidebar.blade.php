@@ -107,6 +107,21 @@
                         </ul>
                     </li>
 
+                    {{-- Coupon part  --}}
+                    @if ($usr->can('coupon.create') || $usr->can('coupon.view') ||  $usr->can('coupon.edit') ||  $usr->can('coupon.delete'))
+
+                    <li class="{{Route::is('admin.coupon.index') | Route::is('admin.coupon.edit') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="fa fa-list-ul"></i><span>Coupon
+                            </span></a>
+                        <ul class="collapse">
+                            <li class="{{Route::is('admin.coupon.index') | Route::is('admin.coupon.edit') ? 'active' : ''}}"><a href="{{route('admin.coupon.index')}}">All Coupon</a></li>
+                        </ul>
+                    </li>
+                    @endif
+
+                    {{-- End coupon part  --}}
+
                     {{-- Sidebar --}}
                     <li class="{{Route::is('admin.slider.index') | Route::is('admin.slider.edit') | Route::is('admin.slider.create') ? 'active' : '' }}">
                         <a href="javascript:void(0)" aria-expanded="true"><i

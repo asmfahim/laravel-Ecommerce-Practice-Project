@@ -74,7 +74,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
             <!-- ============================================================= LOGO ============================================================= -->
-            <div class="logo"> <a href="{{url('/')}}" style="font-size: 22px; color:#fff; font-family: 'Open Sans', sans-serif;"> <img src="{{asset('public/Frontend')}}/assets/images/logo/logo3.png" alt="logo" style="width: 60px; height:60px"> Fly Market </a> </div>
+            <div class="logo"> <a href="{{url('/')}}" style="font-size: 22px; color:#fff; font-family: 'Open Sans', sans-serif;">  E-Market </a> </div>
             <!-- /.logo -->
             <!-- ============================================================= LOGO : END ============================================================= --> </div>
           <!-- /.logo-holder -->

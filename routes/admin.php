@@ -17,6 +17,7 @@
     use App\Http\Controllers\Backend\SubCategoryController;
     use App\Http\Controllers\Backend\SubSubCategoryController;
     use App\Http\Controllers\Backend\UserController;
+    use App\Http\Controllers\Backend\CouponController;
 
 Route::get('/', function () {
         return redirect()->route('admin.login.get');
@@ -93,6 +94,9 @@ Route::get('/', function () {
         Route::resource('/slider', SliderController::class,['names' => 'admin.slider'])->except(['create','show']);
         Route::get('/slider/inactive/{id}',[SliderController::class,'slider_inactive'])->name('admin.slider.inactive');
         Route::get('/slider/active/{id}',[SliderController::class,'slider_active'])->name('admin.slider.active');
+
+        //Coupons Routes
+        Route::resource('/coupon', CouponController::class,['names' => 'admin.coupon'])->except(['create', 'show']);
 
 
 
