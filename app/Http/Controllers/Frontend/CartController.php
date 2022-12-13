@@ -15,6 +15,7 @@ class CartController extends Controller
 
 
 
+
     public function AddToCart(Request $request, $id){
 
     	$product = Product::findOrFail($id);
@@ -106,7 +107,7 @@ class CartController extends Controller
     } // end method
 
 
-
+    
 
 
 
