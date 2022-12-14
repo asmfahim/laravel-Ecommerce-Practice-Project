@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ShipDivision;
 use App\Models\ShipDistrict;
+use App\Models\ShipState;
 use Carbon\Carbon;
 
 class ShippingAreaController extends Controller
@@ -231,6 +232,99 @@ class ShippingAreaController extends Controller
 
 
     }
+
+
+
+
+    // Statestate part Start Here
+
+    public function State_Index()
+    {
+
+        if (is_null($this->user) || !$this->user->can('shipping.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any shipping !'); }
+
+        $division = ShipDivision::orderBy('division_name','ASC')->get();
+        $district = ShipDistrict::orderBy('district_name','ASC')->get();
+        $state = ShipState::with('division','district')->orderBy('id','DESC')->get();
+		return view('Backend.ship.state.state-view',compact('district','division','state'));
+    }
+
+
+    public function State_Store(Request $request)
+    {
+
+        if (is_null($this->user) || !$this->user->can('shipping.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to Create any shipping !'); }
+
+            $request->validate([
+                'division_id' => 'required',
+                'district_id' => 'required',
+                'state_name' => 'required',
+
+            ]);
+
+
+        ShipState::insert([
+
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'state_name' => $request->state_name,
+            'created_at' => Carbon::now(),
+
+            ]);
+
+        session()->flash('success', 'Shipping has been Inserted Successfully !!');
+        return redirect()->route('admin.shipping.state.index');
+
+
+    }
+
+    public function State_Edit($id)
+    {
+        if (is_null($this->user) || !$this->user->can('shipping.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to Edit any shipping !'); }
+
+            $division = ShipDivision::orderBy('division_name','ASC')->get();
+            $district = ShipDistrict::orderBy('district_name','ASC')->get();
+            $state = ShipState::findOrFail($id);
+            return view('Backend.ship.state.state-edit',compact('district','division','state'));
+    }
+
+    public function State_Update(Request $request, $id)
+    {
+        if (is_null($this->user) || !$this->user->can('shipping.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to Edit any shipping !'); }
+
+            ShipState::findOrFail($id)->update([
+
+                'division_id' => $request->division_id,
+                'district_id' => $request->district_id,
+                'state_name' => $request->state_name,
+                'created_at' => Carbon::now(),
+
+                ]);
+
+                session()->flash('success', 'Shipping has been Updated Successfully !!');
+                return redirect()->route('admin.shipping.state.index');
+
+    }
+
+    public function State_Destroy($id)
+    {
+         if(is_null($this->user) || !$this->user->can('shipping.delete')){
+            abort(403, " Sorry !! You are Unauthorized to Delete any shipping");}
+
+            ShipState::findOrFail($id)->delete();
+
+            session()->flash('success', 'Shipping has been Deleted Successfully !!');
+            return redirect()->route('admin.shipping.state.index');
+
+
+    }
+
+
+
 
 
 }

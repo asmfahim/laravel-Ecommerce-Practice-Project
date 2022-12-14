@@ -141,7 +141,7 @@
                     {{-- shipping part  --}}
                     @if ($usr->can('shipping.create') || $usr->can('shipping.view') ||  $usr->can('shipping.edit') ||  $usr->can('shipping.delete'))
 
-                    <li class="{{Route::is('admin.shipping.index') | Route::is('admin.shipping.edit') ? 'active' : '' }}">
+                    <li class="{{Route::is('admin.shipping.index') | Route::is('admin.shipping.edit') | Route::is('admin.shipping.district.index') | Route::is('admin.shipping.district.edit') | Route::is('admin.shipping.state.index') | Route::is('admin.shipping.state.edit') ? 'active' : '' }}">
                         <a href="javascript:void(0)" aria-expanded="true"><i
                                 class="fa fa-truck"></i><span>Shipping
                             </span></a>
@@ -149,6 +149,8 @@
                             <li class="{{Route::is('admin.shipping.index') | Route::is('admin.shipping.edit') ? 'active' : ''}}"><a href="{{route('admin.shipping.index')}}">Shipping Division</a></li>
 
                             <li class="{{Route::is('admin.shipping.district.index') | Route::is('admin.shipping.district.edit') ? 'active' : ''}}"><a href="{{route('admin.shipping.district.index')}}">Shipping District</a></li>
+
+                            <li class="{{Route::is('admin.shipping.state.index') | Route::is('admin.shipping.state.edit') ? 'active' : ''}}"><a href="{{route('admin.shipping.state.index')}}">Shipping State</a></li>
                         </ul>
                     </li>
                     @endif

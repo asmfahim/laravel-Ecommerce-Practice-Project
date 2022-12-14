@@ -105,11 +105,26 @@ Route::get('/', function () {
 
         //Shiping District Routes
         Route::prefix('shipping/district')->group(function(){
-        Route::get('/',[ShippingAreaController::class,'District_Index'])->name('admin.shipping.district.index');
-        Route::post('/store',[ShippingAreaController::class,'District_Store'])->name('admin.shipping.district.store');
-        Route::get('/edit/{id}',[ShippingAreaController::class,'District_Edit'])->name('admin.shipping.district.edit');
-        Route::put('/update/{id}',[ShippingAreaController::class,'District_Update'])->name('admin.shipping.district.update');
-        Route::delete('/destroy/{id}',[ShippingAreaController::class,'District_Destroy'])->name('admin.shipping.district.destroy');
+        Route::get('/',[ShippingAreaController::class,'district_Index'])->name('admin.shipping.district.index');
+        Route::post('/store',[ShippingAreaController::class,'district_Store'])->name('admin.shipping.district.store');
+        Route::get('/edit/{id}',[ShippingAreaController::class,'district_Edit'])->name('admin.shipping.district.edit');
+        Route::put('/update/{id}',[ShippingAreaController::class,'district_Update'])->name('admin.shipping.district.update');
+        Route::delete('/destroy/{id}',[ShippingAreaController::class,'district_Destroy'])->name('admin.shipping.district.destroy');
+
+        //Shiping District Routes
+        Route::prefix('shipping/state')->group(function(){
+        Route::get('/',[ShippingAreaController::class,'State_Index'])->name('admin.shipping.state.index');
+        Route::post('/store',[ShippingAreaController::class,'State_Store'])->name('admin.shipping.state.store');
+        Route::get('/edit/{id}',[ShippingAreaController::class,'State_Edit'])->name('admin.shipping.state.edit');
+        Route::put('/update/{id}',[ShippingAreaController::class,'State_Update'])->name('admin.shipping.state.update');
+        Route::delete('/destroy/{id}',[ShippingAreaController::class,'State_Destroy'])->name('admin.shipping.state.destroy');
+    });
+
+
+
+
+
+
 });
 
 
